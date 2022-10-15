@@ -7,7 +7,22 @@ on:
       branches: [ main ]
 
 jobs:
-  build-and-test:
+  build-macOS:
+    runs-on: macos-11
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      run: make
+    - name: exec
+      run: ./test
+    - name: release
+      id: release
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-macOS
+        path: /Users/runner/work/test
+    
+  build-ubuntu:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -15,11 +30,9 @@ jobs:
       run: make
     - name: exec
       run: ./test
-    - name: pwd
-      run: pwd && echo && ls
     - name: release
       id: release
       uses: actions/upload-artifact@v2
       with:
-        name: releaseidk
+        name: release-ubuntu
         path: /home/runner/work/ci/ci/test
