@@ -7,7 +7,24 @@ on:
       branches: [ main ]
 
 jobs:
-  build-macOS:
+  build-macOS-ARM64:
+    runs-on: macos-11
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      run: arch -arm64 make
+    - name: exec
+      run: ./test
+    - name: envdetails
+      run: ls && echo && pwd
+    - name: release
+      id: release
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-macOS-ARM64
+        path: /Users/runner/work/ci/ci/test
+
+  build-macOS-x86_64:
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +38,7 @@ jobs:
       id: release
       uses: actions/upload-artifact@v2
       with:
-        name: release-macOS
+        name: release-macOS-x86_64
         path: /Users/runner/work/ci/ci/test
     
   build-ubuntu:
