@@ -15,4 +15,9 @@ jobs:
       run: make
     - name: exec
       run: ./test
-
+    - name: release
+      id: release
+      uses: actions/upload-artifact@v2
+      with:
+        name: releaseidk
+        path: /Users/runner/work/test
