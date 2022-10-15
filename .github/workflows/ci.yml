@@ -22,7 +22,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: release-macOS
-        path: /Users/runner/work/test
+        path: /Users/runner/work/ci/ci/test
     
   build-ubuntu:
     runs-on: ubuntu-latest
